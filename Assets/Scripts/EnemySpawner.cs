@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour {
+
+	public static List<GameObject> enemies = new List<GameObject> ();
 
 	public float delayMin = 0;
 	public float delayMax = 3;
@@ -24,11 +27,14 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void Spawn(){
 		remainingDelay = Random.Range (delayMin, delayMax);
+		delayMax = remainingDelay;
 
 		Vector2 spawnLoc = (Vector2)transform.position + GetUnitOncircle (Random.Range (0, 360), 1) * spawnDist;
 
 		GameObject go = (GameObject)Resources.Load ("Enemy");
 		GameObject en = (GameObject)GameObject.Instantiate (go, spawnLoc, Quaternion.identity);
+
+		enemies.Add (en);
 	}
 
 	Vector2 GetUnitOncircle(float angleDegrees, float radius) {
