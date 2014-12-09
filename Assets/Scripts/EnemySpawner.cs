@@ -26,8 +26,9 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public void Spawn(){
-		remainingDelay = Random.Range (delayMin, delayMax);
-		delayMax = remainingDelay;
+		delayMax = delayMax * .9f;
+		remainingDelay = delayMax;
+
 
 		Vector2 spawnLoc = (Vector2)transform.position + GetUnitOncircle (Random.Range (0, 360), 1) * spawnDist;
 

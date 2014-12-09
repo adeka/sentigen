@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
 	public float speed = 100;
+	public int killValue = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,13 @@ public class Enemy : MonoBehaviour {
 
 		if(cell != null){
 			cell.Damage();
+			GameObject.Destroy(this.gameObject);
+		}
+
+		Turret turret = other.gameObject.GetComponent<Turret>();
+
+		if(turret != null){
+			GameObject.Destroy(turret.gameObject);
 			GameObject.Destroy(this.gameObject);
 		}
 	}
