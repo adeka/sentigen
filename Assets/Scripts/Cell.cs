@@ -21,6 +21,10 @@ public class Cell : MonoBehaviour {
 	
 	}
 
+	void OnGUI () {
+		GUI.Box (new Rect (20, Screen.height - 50, 150, 20), "Cell HP: " + hp);
+	} 
+
 	public static Vector3 GetLoc(){
 		return instance.transform.position;
 	}

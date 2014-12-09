@@ -6,6 +6,8 @@ public class TurretSpawner : MonoBehaviour {
 
 	private bool buildTurret = false;
 
+	private int resources = 900;
+
 	private Camera mainCamera;
 
 	// Use this for initialization
@@ -21,17 +23,19 @@ public class TurretSpawner : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		if(GUI.Button(new Rect(20,40,80,20), "Build Turret")) {
+		if(GUI.Button(new Rect(20,40,150,20), "Build Turret [B]") || Input.GetKeyDown(KeyCode.B)) {
 			buildTurret = true;
 		}
+		GUI.Box (new Rect (Screen.width - 200, 40, 150, 20), "Resources: " + resources);
 	}
 	
 	void placeTurret () {
 		Vector2 location = mainCamera.ScreenToWorldPoint (Input.mousePosition);
-		if (buildTurret) {
+		if (buildTurret && resources >= 100) {
 			GameObject go = (GameObject)Resources.Load ("TurretBase");
 			GameObject tr = (GameObject)GameObject.Instantiate (go, location, Quaternion.identity);
-			print ("Turret created");
+			resources -= 100;
+			//print ("Turret created");
 			buildTurret = false;
 		}
 	}
