@@ -10,14 +10,17 @@ public class TurretSpawner : MonoBehaviour {
 
 	private Camera mainCamera;
 
+	private Cell cell;
+
 	// Use this for initialization
 	void Start () {
 		mainCamera = Camera.main;
+		cell = gameObject.GetComponent ("Cell") as Cell;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) && !cell.gameOver) {
 			placeTurret();
 				}
 	}

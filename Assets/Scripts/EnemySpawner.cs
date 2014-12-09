@@ -12,15 +12,17 @@ public class EnemySpawner : MonoBehaviour {
 
 	public float spawnDist = 10;
 
+	private Cell cell;
+
 	// Use this for initialization
 	void Start () {
-	
+		cell = gameObject.GetComponent ("Cell") as Cell;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		remainingDelay = remainingDelay - Time.deltaTime;
-		if(remainingDelay <= 0){
+		if(remainingDelay <= 0 && !cell.gameOver && cell.timer > 0){
 			Spawn();
 		}
 	}

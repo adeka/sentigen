@@ -18,7 +18,6 @@ public class Bullet : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		Enemy enemy = other.gameObject.GetComponent<Enemy> ();
-		
 		if(enemy != null){
 			GameObject.Destroy(enemy.gameObject);
 			GameObject.Destroy(this.gameObject);
