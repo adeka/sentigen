@@ -6,7 +6,9 @@ public class TurretSpawner : MonoBehaviour {
 
 	private bool buildTurret = false;
 
-	private int resources = 900;
+	private bool buildTurret2 = false;
+
+	private float resources = 500f;
 
 	private Camera mainCamera;
 
@@ -20,16 +22,20 @@ public class TurretSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		resources += (Time.deltaTime * 10f);
 		if (Input.GetMouseButtonDown (0) && !cell.gameOver) {
 			placeTurret();
 				}
 	}
 
 	void OnGUI () {
-		if(GUI.Button(new Rect(20,40,150,20), "Build Turret [B]") || Input.GetKeyDown(KeyCode.B)) {
+		if(GUI.Button(new Rect(20,40,150,20), "Build Turret [B] - 100") || Input.GetKeyDown(KeyCode.B)) {
 			buildTurret = true;
 		}
-		GUI.Box (new Rect (Screen.width - 200, 40, 150, 20), "Resources: " + resources);
+		if(GUI.Button(new Rect(20,80,150,20), "Build Turret [N] - 150") || Input.GetKeyDown(KeyCode.N)) {
+			buildTurret2 = true;
+		}
+		GUI.Box (new Rect (Screen.width - 200, 40, 150, 20), "Resources: " + (int)resources);
 	}
 	
 	void placeTurret () {
@@ -38,8 +44,13 @@ public class TurretSpawner : MonoBehaviour {
 			GameObject go = (GameObject)Resources.Load ("TurretBase");
 			GameObject tr = (GameObject)GameObject.Instantiate (go, location, Quaternion.identity);
 			resources -= 100;
-			//print ("Turret created");
 			buildTurret = false;
+		}
+		if (buildTurret2 && resources >= 150) {
+			GameObject go = (GameObject)Resources.Load ("TurretBase2");
+			GameObject tr = (GameObject)GameObject.Instantiate (go, location, Quaternion.identity);
+			resources -= 150;
+			buildTurret2 = false;
 		}
 	}
 
