@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public void Spawn(){
+		//Fast version
 		//remainingDelay = Random.Range (delayMin, delayMax);
 		//delayMax = remainingDelay;
 
@@ -35,11 +36,15 @@ public class EnemySpawner : MonoBehaviour {
 		remainingDelay = delayMax;
 
 		Vector2 spawnLoc = (Vector2)transform.position + GetUnitOncircle (Random.Range (0, 360), 1) * spawnDist;
+		Vector2 spawnLoc2 = (Vector2)transform.position + GetUnitOncircle (Random.Range (0, 360), 1) * spawnDist;
 
 		GameObject go = (GameObject)Resources.Load ("Enemy");
 		GameObject en = (GameObject)GameObject.Instantiate (go, spawnLoc, Quaternion.identity);
+		GameObject go2 = (GameObject)Resources.Load ("Enemy2");
+		GameObject en2 = (GameObject)GameObject.Instantiate (go2, spawnLoc2, Quaternion.identity);
 
 		enemies.Add (en);
+		enemies.Add (en2);
 	}
 
 	Vector2 GetUnitOncircle(float angleDegrees, float radius) {
