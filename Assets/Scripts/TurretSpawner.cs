@@ -8,7 +8,7 @@ public class TurretSpawner : MonoBehaviour {
 
 	private bool buildTurret2 = false;
 
-	private float resources = 500f;
+	private float resources = 400f;
 
 	private Camera mainCamera;
 
