@@ -14,6 +14,8 @@ public class TurretSpawner : MonoBehaviour {
 
 	private Cell cell;
 
+	private float timer = 0f;
+
 	// Use this for initialization
 	void Start () {
 		mainCamera = Camera.main;
@@ -22,7 +24,11 @@ public class TurretSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		resources += (Time.deltaTime * 10f);
+		timer += Time.deltaTime;
+		if (timer >= 1f) {
+			resources += 10f;
+			timer = 0f;
+				}
 		if (Input.GetMouseButtonDown (0) && !cell.gameOver) {
 			placeTurret();
 				}
